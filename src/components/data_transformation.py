@@ -1,3 +1,6 @@
+import os
+os.environ.setdefault("LOKY_MAX_CPU_COUNT", "1")
+
 import sys 
 from dataclasses import dataclass
 
@@ -10,7 +13,6 @@ from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
 from src.exception import CustomException
 from src.logger import logging
-import os
 from src.utils import save_object
 
 @dataclass
@@ -47,7 +49,8 @@ class DataTransformation:
                 transformers=[
                     ("num_pipeline", num_pipeline, numerical_columns),
                     ("cat_pipeline", cat_pipeline, categorical_columns)
-                ]
+                ],
+                n_jobs=1
             )
 
             return preprocessor
