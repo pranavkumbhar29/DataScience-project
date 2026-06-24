@@ -31,10 +31,23 @@ def evaluate_model(X_train, y_train, X_test, y_test, models,param):
             model.set_params(**gs.best_params_)
             model.fit(X_train,y_train)
 
+
+
             #model.fit(X_train, y_train)
+
+            y_train_pred=model.predict(X_train)
+
             y_pred = model.predict(X_test)
-            score = r2_score(y_test, y_pred)
-            report[list(models.keys())[i]] = score
+            train_model_score=r2_score(y_train,y_train_pred)
+            test_model_score = r2_score(y_test, y_pred)
+            report[list(models.keys())[i]] = test_model_score
         return report
     except Exception as e:
         raise CustomException(e, sys)
+    
+def load_object(file_path):
+    try:
+        with open(file_path,"rb") as file_obj:
+            return pickle.load(file_obj)
+    except Exception as e:
+        raise CustomException(e,sys)

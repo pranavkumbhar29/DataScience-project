@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>Student Exam Performance Prediction</title>
+	<style>
+		body{font-family:system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;margin:18px auto;color:#222;max-width:900px}
+		h1{font-size:1.8rem;margin-bottom:6px}
+		.sub{color:#555;margin-bottom:18px}
+		.card{border:1px solid #e6e6e6;padding:18px;border-radius:8px;background:#fff}
+		.row{display:flex;gap:12px}
+		.col{flex:1;min-width:0}
+		label{display:block;font-weight:600;margin-bottom:6px}
+		select,input[type=number]{width:100%;padding:8px;border:1px solid #ccc;border-radius:6px}
+		.btn{display:inline-block;padding:10px 14px;background:#0366d6;color:#fff;border-radius:6px;border:none;cursor:pointer;margin-top:10px}
+		.result{margin-top:18px;padding:12px;background:#f6fffa;border:1px solid #dff6e9;border-radius:6px;color:#036644;font-weight:700}
+		.small{font-size:0.9rem;color:#444}
+		.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+	</style>
+</head>
+<body>
+	<h1>Student Exam Performance Prediction</h1>
+	<div class="sub">Enter student attributes and scores to predict the maths score.</div>
+
+	<div class="card">
+		<form action="/predictdata" method="post">
+			<div class="form-grid">
+				<div>
+					<label for="gender">Gender</label>
+					<select name="gender" id="gender" required>
+						<option value="">Select your Gender</option>
+						<option value="female">female</option>
+						<option value="male">male</option>
+					</select>
+				</div>
+
+				<div>
+					<label for="race_ethnicity">Race or Ethnicity</label>
+					<select name="race_ethnicity" id="race_ethnicity" required>
+						<option value="">Select Ethnicity</option>
+						<option value="group A">group A</option>
+						<option value="group B">group B</option>
+						<option value="group C">group C</option>
+						<option value="group D">group D</option>
+						<option value="group E">group E</option>
+					</select>
+				</div>
+
+				<div>
+					<label for="parental_level_of_education">Parental Level of Education</label>
+					<select name="parental_level_of_education" id="parental_level_of_education" required>
+						<option value="">Select Parent Education</option>
+						<option value="some high school">some high school</option>
+						<option value="high school">high school</option>
+						<option value="some college">some college</option>
+						<option value="associate's degree">associate's degree</option>
+						<option value="bachelor's degree">bachelor's degree</option>
+						<option value="master's degree">master's degree</option>
+					</select>
+				</div>
+
+				<div>
+					<label for="lunch">Lunch Type</label>
+					<select name="lunch" id="lunch" required>
+						<option value="">Select Lunch Type</option>
+						<option value="standard">standard</option>
+						<option value="free/reduced">free/reduced</option>
+					</select>
+				</div>
+
+				<div>
+					<label for="test_preparation_course">Test preparation Course</label>
+					<select name="test_preparation_course" id="test_preparation_course" required>
+						<option value="">Select Test course</option>
+						<option value="none">none</option>
+						<option value="completed">completed</option>
+					</select>
+				</div>
+
+				<div>
+					<label for="writing_score">Writing Score (out of 100)</label>
+					<input type="number" id="writing_score" name="writing_score" min="0" max="100" required>
+				</div>
+
+				<div>
+					<label for="reading_score">Reading Score (out of 100)</label>
+					<input type="number" id="reading_score" name="reading_score" min="0" max="100" required>
+				</div>
+			</div>
+
+			<button class="btn" type="submit">Predict your Maths Score</button>
+		</form>
+
+		{% if results is defined %}
+		<div class="result">THE prediction is <span style="color:#003366">{{ results }}</span></div>
+		{% else %}
+		<div class="small">Prediction will appear here after submission.</div>
+		{% endif %}
+	</div>
+
+</body>
+</html>
