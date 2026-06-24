@@ -1,0 +1,19 @@
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.db
+*.sqlite3
+*.egg-info/
+*.egg
+.DS_Store
+*.log
+# Keep trained artifacts required for inference
+!artifacts/model.pkl
+!artifacts/preprocessor.pkl
+artifacts/data.csv
+artifacts/test.csv
+artifacts/train.csv
+notebook/
+logs/
